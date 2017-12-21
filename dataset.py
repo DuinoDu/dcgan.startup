@@ -20,6 +20,7 @@ if istorch_0_3():
 else:
     resize = transforms.Scale
 
+
 def create_dataset(dataset_name, root=data_root, image_size=None):
     """Create dataset given dataset name. 
 

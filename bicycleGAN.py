@@ -179,9 +179,9 @@ class _netD(nn.Module):
         return output.view(-1, 1).squeeze(1)
     
 
-class DCGAN(GAN):
-    """DCGAN
-    https://arxiv.org/pdf/1511.06434.pdf
+class BicycleGAN(GAN):
+    """BicycleGAN
+    https://arxiv.org/pdf/1711.11586.pdf
     """
     def __init__(self):
         super(DCGAN, self).__init__()
@@ -197,7 +197,6 @@ class DCGAN(GAN):
         D = self._nets[1] # D --- 1 
         E = self._nets[2] # E --- 2
 
-        
         batch_size = x.data.size(0)
         z = torch.FloatTensor(0).resize_(batch_size, self.z_dims, 1, 1).normal_(0,1)
         label_real = torch.FloatTensor(batch_size).fill_(1)
@@ -220,7 +219,6 @@ class DCGAN(GAN):
             errG = self._criterions[0](D(fake), label_real)
             self._errors = [errG, errD]
         return fake
-
 
 
 def test_D_G():

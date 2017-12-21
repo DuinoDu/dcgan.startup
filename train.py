@@ -42,7 +42,7 @@ print(args)
 # args
 os.environ['CUDA_VISIBLE_DIVICES'] = str(args.gpuID)
 if args.tensorboard:
-   from tensorboard import SummaryWriter
+   from tensorboardX import SummaryWriter
    writer = SummaryWriter()
 if not os.path.exists(args.save_folder):
     os.makedirs(args.save_folder)
