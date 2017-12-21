@@ -106,7 +106,7 @@ for epoch in range(args.num_iters):
         if args.tensorboard:
             iteration = i + epoch * len(dataloader)
             writer.add_scalar('loss_D', loss_D.data[0], iteration)
-            writer.add_scalar('loss_G', loss_G.data[1], iteration)
+            writer.add_scalar('loss_G', loss_G.data[0], iteration)
         if i % 100 == 0:
             vutils.save_image(real_cpu,
                     '%s/real_samples.png' % args.save_folder,
