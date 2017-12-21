@@ -23,7 +23,7 @@ parser.add_argument('--workers', type=int, help='number of data loading workers'
 parser.add_argument('--batch_size', type=int, default=64, help='input batch size')
 parser.add_argument('--image_size', type=int, default=64, help='the height / width of the input image to network')
 
-parser.add_argument('--num_iters', type=int, default=25, help='number of epochs to train for')
+parser.add_argument('--num_epochs', type=int, default=25, help='number of epochs to train for')
 parser.add_argument('--lr', type=float, default=0.0002, help='learning rate, default=0.0002')
 parser.add_argument('--beta1', type=float, default=0.5, help='beta1 for adam. default=0.5')
 
@@ -87,7 +87,7 @@ if args.tensorboard:
    writer = SummaryWriter()
 
 # train loop
-for epoch in range(args.num_iters):
+for epoch in range(args.num_epochs):
     for i, data in enumerate(dataloader, 0):
         real_cpu, _ = data
         batch_size = real_cpu.size(0)
@@ -101,7 +101,7 @@ for epoch in range(args.num_iters):
 
         # log 
         print('[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f'
-              % (epoch, args.num_iters, i, len(dataloader),
+              % (epoch, args.num_epochs, i, len(dataloader),
                  loss_D.data[0], loss_G.data[0]))
         if args.tensorboard:
             iteration = i + epoch * len(dataloader)
@@ -118,4 +118,4 @@ for epoch in range(args.num_iters):
     torch.save(net.state_dicts(), os.path.join(args.save_folder, 'weights_epoch_%d.pth' % epoch))
 
 if args.tensorboard:
-    write.close()
+    writer.close()
